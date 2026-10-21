@@ -24,5 +24,5 @@ export const THEME_COLORS: Record<Theme, string> = {
   matrix: '#0d1529',
 };
 // Colores del manifest (splash screen e ícono en Android)
-export const BRAND_COLOR = '#5B4BFF';
+export const BRAND_COLOR = '#1CC4B4';
 export const BACKGROUND_COLOR = '#F6F5FB';
