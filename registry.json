@@ -129,6 +129,27 @@
       "files": [{ "path": "registry/components/ui/search-input.tsx", "type": "registry:ui", "target": "~/components/ui/search-input.tsx" }]
     },
     {
+      "name": "responsive-table",
+      "type": "registry:ui",
+      "title": "ResponsiveTable",
+      "description": "Tabla en escritorio y tarjetas en móvil, con orden por columna, acciones por fila y columnas visibles guardadas en IndexedDB.",
+      "dependencies": ["@heroicons/react"],
+      "registryDependencies": ["@xiuh/use-setting"],
+      "files": [
+        { "path": "registry/hooks/use-table-columns.ts", "type": "registry:hook", "target": "~/hooks/use-table-columns.ts" },
+        { "path": "registry/components/ui/responsive-table.tsx", "type": "registry:ui", "target": "~/components/ui/responsive-table.tsx" }
+      ]
+    },
+    {
+      "name": "column-picker",
+      "type": "registry:ui",
+      "title": "ColumnPicker",
+      "description": "Dropdown para elegir las columnas visibles de una ResponsiveTable (mismo id, se sincronizan solos).",
+      "dependencies": ["@heroicons/react"],
+      "registryDependencies": ["@xiuh/responsive-table"],
+      "files": [{ "path": "registry/components/ui/column-picker.tsx", "type": "registry:ui", "target": "~/components/ui/column-picker.tsx" }]
+    },
+    {
       "name": "toaster",
       "type": "registry:ui",
       "title": "Toaster",

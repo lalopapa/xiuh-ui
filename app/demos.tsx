@@ -4,6 +4,8 @@ import Link from "next/link";
 import { DocumentDuplicateIcon, PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
 import DropdownButton from "@/components/ui/dropdown-button";
 import SearchInput from "@/components/ui/search-input";
+import ColumnPicker from "@/components/ui/column-picker";
+import ResponsiveTable, { type Column } from "@/components/ui/responsive-table";
 import { THEMES } from "@/config/app";
 import { usePWA } from "@/hooks/use-pwa";
 import { useSetting } from "@/hooks/use-setting";
@@ -156,7 +158,64 @@ function SearchDemo() {
   );
 }
 
-const ShellLink = ({ href, text }: { href: string; text: string }) => (
+type Client = { id: string; name: string; email: string; city: string; plan: "Pro" | "Básico"; amount: number; since: Date | null };
+
+const CLIENTS: Client[] = [
+  { id: "1", name: "Ana López", email: "ana@ejemplo.com", city: "Melbourne", plan: "Pro", amount: 1250, since: new Date("2025-03-12") },
+  { id: "2", name: "Bruno Díaz", email: "bruno@ejemplo.com", city: "Guadalajara", plan: "Básico", amount: 320, since: new Date("2026-01-08") },
+  { id: "3", name: "Carla Méndez", email: "carla@ejemplo.com", city: "CDMX", plan: "Pro", amount: 980, since: null },
+  { id: "4", name: "Diego Ruiz", email: "diego@ejemplo.com", city: "Monterrey", plan: "Básico", amount: 45, since: new Date("2024-11-30") },
+];
+
+const CLIENT_COLUMNS: Column<Client>[] = [
+  { key: "name", label: "Nombre", sortable: true, mobile: "title", hideable: false },
+  { key: "email", label: "Correo", mobile: "always" },
+  { key: "city", label: "Ciudad", sortable: true },
+  {
+    key: "plan",
+    label: "Plan",
+    sortable: true,
+    render: (c) => <span className={`badge badge-sm ${c.plan === "Pro" ? "badge-primary" : "badge-ghost"}`}>{c.plan}</span>,
+  },
+  { key: "amount", label: "Monto", sortable: true, className: "text-end tabular-nums", render: (c) => `$${c.amount.toLocaleString("es-MX")}` },
+  { key: "since", label: "Cliente desde", sortable: (c) => c.since, defaultVisible: false, render: (c) => c.since?.toLocaleDateString("es-MX") ?? "—" },
+];
+
+export function TableDemo() {
+  const [query, setQuery] = useState("");
+  const [empty, setEmpty] = useState(false);
+  const rows = empty ? [] : CLIENTS.filter((c) => `${c.name} ${c.email} ${c.city}`.toLowerCase().includes(query.toLowerCase()));
+  return (
+    <div className="flex flex-col gap-3">
+      <div className="flex items-center gap-2">
+        <SearchInput onSearch={setQuery} placeholder="Buscar cliente" className="input-sm flex-1" />
+        <ColumnPicker tableId="demo-clientes" columns={CLIENT_COLUMNS} />
+        <label className="label gap-2 text-sm">
+          <input type="checkbox" className="toggle toggle-sm" checked={empty} onChange={(e) => setEmpty(e.target.checked)} />
+          Vacía
+        </label>
+      </div>
+      <ResponsiveTable
+        id="demo-clientes"
+        columns={CLIENT_COLUMNS}
+        rows={rows}
+        rowKey={(c) => c.id}
+        emptyMessage="Ningún cliente coincide"
+        actions={(c) => (
+          <DropdownButton
+            items={[
+              { label: "Editar", icon: PencilSquareIcon, onClick: () => showToast("info", `Editar a ${c.name}`) },
+              { label: "Eliminar", icon: TrashIcon, className: "text-error", onClick: () => showToast("error", `Eliminar a ${c.name}`) },
+            ]}
+          />
+        )}
+      />
+      <span className="text-xs text-base-content/60">Angosta la ventana para ver las tarjetas; las columnas elegidas se guardan en IndexedDB.</span>
+    </div>
+  );
+}
+
+const ShellLink =({ href, text }: { href: string; text: string }) => (
   <Link href={href} className="btn btn-sm btn-primary">
     {text}
   </Link>
@@ -168,6 +227,13 @@ const DEMOS: Record<string, ComponentType> = {
   "dashboard-shell": () => <ShellLink href="/demo/dashboard" text="Abrir demo del dashboard" />,
   "dropdown-button": DropdownDemo,
   "search-input": SearchDemo,
+  "responsive-table": () => (
+    <div className="flex flex-col gap-3">
+      <TableDemo />
+      <ShellLink href="/demo/table" text="Abrir a pantalla completa" />
+    </div>
+  ),
+  "column-picker": () => <span className="text-sm">Se ve junto a la tabla de arriba.</span>,
   themes: ThemesDemo,
   "use-setting": SettingsDemo,
   theme: ThemeDemo,

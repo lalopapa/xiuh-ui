@@ -35,6 +35,8 @@ npx shadcn add @xiuh/toaster --overwrite   # traer la versión nueva de una piez
 | `dashboard-shell` | `AppShell`: sidebar fijo en escritorio, drawer en móvil, `Topbar` con migas y `UserMenu` |
 | `dropdown-button` | Menú de acciones ⋮ con popover (no lo recorta el overflow) |
 | `search-input` | Buscador con debounce |
+| `responsive-table` | Tabla en escritorio y tarjetas en móvil; orden por columna, acciones por fila, columnas visibles en IndexedDB (`useTableColumns`) |
+| `column-picker` | Dropdown para elegir columnas visibles de una `ResponsiveTable` |
 | `toaster` | Avisos react-hot-toast con estilo daisy y `showToast` |
 | `modal`, `confirm-modal` | `<dialog class="modal">` controlados |
 | `spinner`, `button-copy` | Utilidades pequeñas |
