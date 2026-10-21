@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# xiuh-ui
 
-## Getting Started
+Registro de componentes daisyUI de Xiuhlab, al estilo shadcn: las piezas se **copian** al proyecto con el CLI y ahí se pueden modificar libremente.
 
-First, run the development server:
+- Catálogo en vivo: https://lalopapa.github.io/xiuh-ui
+- Registro: `https://lalopapa.github.io/xiuh-ui/r/{name}.json`
+- Stack base: Next 15.5 · React 19 · Tailwind 4.3 · daisyUI 5.7
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Usarlo en un proyecto
+
+Los proyectos nuevos salen de [xiuh-starter](../xiuh-starter), que ya trae el namespace configurado en `components.json`:
+
+```json
+"registries": { "@xiuh": "https://lalopapa.github.io/xiuh-ui/r/{name}.json" }
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```bash
+npx shadcn add @xiuh/modal
+npx shadcn add @xiuh/toaster --overwrite   # traer la versión nueva de una pieza
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Piezas
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Pieza | Qué trae |
+|---|---|
+| `app-config` | `config/app.ts`: nombre, base IndexedDB, temas y colores |
+| `themes` | `styles/xiuh-themes.css`: temas thunder, thunder-dark y matrix, breakpoint `xs`, utilidades `bb`/`bbi` |
+| `db` | `lib/db.ts`: Dexie con tabla `settings` y `SyncedEntity` para sincronizar offline |
+| `settings` | `lib/settings.ts`: `getSetting`/`setSetting` tipados, con respaldo en localStorage |
+| `use-setting` | `hooks/use-setting.ts`: preferencia reactiva (`useLiveQuery`) |
+| `theme` | `lib/theme.ts`, `hooks/use-theme.ts`, `ThemePicker` |
+| `pwa` | `app/sw.ts` (Serwist), `app/manifest.ts`, `/~offline`, `usePWA`, `PWAInstallPrompt` (incluye iOS) |
+| `toaster` | Avisos react-hot-toast con estilo daisy y `showToast` |
+| `modal`, `confirm-modal` | `<dialog class="modal">` controlados |
+| `spinner`, `button-copy` | Utilidades pequeñas |
 
-## Learn More
+## Agregar o cambiar una pieza
 
-To learn more about Next.js, take a look at the following resources:
+1. Escribe el archivo en `registry/` con la **misma ruta que tendrá en el proyecto** (`registry/components/ui/x.tsx` → `components/ui/x.tsx`). Los imports usan `@/…` y en este repo resuelven primero a `registry/` (ver `tsconfig.json`).
+2. Agrégala a `registry.json` con `target: "~/ruta"`, sus `dependencies` (npm) y `registryDependencies` (`@xiuh/…`). Si requiere pasos manuales, ponlos en `docs`: el CLI los muestra al instalar.
+3. Agrega una demo en `app/demos.tsx`.
+4. `npm run build` (genera `public/r/*.json` y el sitio en `out/`). Al hacer push a `main`, la GitHub Action lo publica.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Convenciones
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Textos visibles como props con valor por defecto en español; nada de librerías de i18n dentro de las piezas.
+- Solo clases de daisy y tokens del tema (`bg-base-100`, `text-primary`…), nunca colores fijos.
+- Nada de clases armadas con plantillas (`loading-${size}`): Tailwind no las detecta.
+- El CLI borra el comentario de la **primera línea** del archivo: no empieces un archivo con un comentario.
+- En temas propios, `default`/`prefersdark` van dentro del bloque `@plugin "daisyui/theme"`; los flags `--default`/`--prefersdark` de `themes:` no les aplican.
 
-## Deploy on Vercel
+## Probar el registro en local
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run build
+npx serve out -l 4123
+# en el proyecto de prueba, cambia temporalmente el registro a http://localhost:4123/r/{name}.json
+```

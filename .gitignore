@@ -17,6 +17,9 @@
 /.next/
 /out/
 
+# registro generado por `shadcn build` (se arma en la GitHub Action)
+/public/r/
+
 # production
 /build
 

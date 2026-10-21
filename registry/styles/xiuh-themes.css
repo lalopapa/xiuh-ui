@@ -1,0 +1,133 @@
+/*
+ * Temas y utilidades de Xiuhlab (registro @xiuh/themes).
+ * Se importa en globals.css justo después de tailwindcss.
+ * Ojo: en temas propios, `default` y `prefersdark` se declaran aquí; los flags
+ * --default/--prefersdark de `themes:` en @plugin "daisyui" no les aplican.
+ */
+
+@plugin "daisyui/theme" {
+  name: "thunder";
+  default: true;
+  color-scheme: light;
+  --color-base-100: #FFFFFF;
+  --color-base-200: #F6F5FB;
+  --color-base-300: #E7E4F2;
+  --color-base-content: #1E1B2E;
+  --color-primary: #5B4BFF;
+  --color-primary-content: #FFFFFF;
+  --color-secondary: #FF7A59;
+  --color-secondary-content: #FFFFFF;
+  --color-accent: #12C2A4;
+  --color-accent-content: #04221D;
+  --color-neutral: #1E1B2E;
+  --color-neutral-content: #F6F5FB;
+  --color-info: #3B82F6;
+  --color-info-content: #FFFFFF;
+  --color-success: #16A34A;
+  --color-success-content: #FFFFFF;
+  --color-warning: #F59E0B;
+  --color-warning-content: #1E1B2E;
+  --color-error: #E5484D;
+  --color-error-content: #FFFFFF;
+  --radius-box: 1rem;
+  --radius-field: 0.75rem;
+  --radius-selector: 2rem;
+  --size-field: 0.25rem;
+  --size-selector: 0.25rem;
+  --border: 1px;
+  --depth: 1;
+  --noise: 0;
+}
+
+@plugin "daisyui/theme" {
+  name: "thunder-dark";
+  prefersdark: true;
+  color-scheme: dark;
+  --color-base-100: #16141F;
+  --color-base-200: #0F0D17;
+  --color-base-300: #2A2738;
+  --color-base-content: #ECEAF5;
+  --color-primary: #5B4BFF;
+  --color-primary-content: #FFFFFF;
+  --color-secondary: #FF7A59;
+  --color-secondary-content: #FFFFFF;
+  --color-accent: #12C2A4;
+  --color-accent-content: #04221D;
+  --color-neutral: #2A2738;
+  --color-neutral-content: #ECEAF5;
+  --color-info: #3B82F6;
+  --color-info-content: #FFFFFF;
+  --color-success: #16A34A;
+  --color-success-content: #FFFFFF;
+  --color-warning: #F59E0B;
+  --color-warning-content: #1E1B2E;
+  --color-error: #E5484D;
+  --color-error-content: #FFFFFF;
+  --radius-box: 1rem;
+  --radius-field: 0.75rem;
+  --radius-selector: 2rem;
+  --size-field: 0.25rem;
+  --size-selector: 0.25rem;
+  --border: 1px;
+  --depth: 1;
+  --noise: 0;
+}
+
+@plugin "daisyui/theme" {
+  name: "matrix";
+  color-scheme: dark;
+  --color-base-100: oklch(12% 0.042 264.695);
+  --color-base-200: oklch(20% 0.042 265.755);
+  --color-base-300: oklch(27% 0.041 260.031);
+  --color-base-content: oklch(72% 0.219 149.579);
+  --color-primary: oklch(72% 0.219 149.579);
+  --color-primary-content: oklch(27% 0.046 192.524);
+  --color-secondary: oklch(79% 0.209 151.711);
+  --color-secondary-content: oklch(26% 0.065 152.934);
+  --color-accent: oklch(74% 0.16 232.661);
+  --color-accent-content: oklch(29% 0.066 243.157);
+  --color-neutral: oklch(37% 0.044 257.287);
+  --color-neutral-content: oklch(98% 0.003 247.858);
+  --color-info: oklch(70% 0.165 254.624);
+  --color-info-content: oklch(28% 0.091 267.935);
+  --color-success: oklch(79% 0.209 151.711);
+  --color-success-content: oklch(26% 0.065 152.934);
+  --color-warning: oklch(85% 0.199 91.936);
+  --color-warning-content: oklch(28% 0.066 53.813);
+  --color-error: oklch(70% 0.191 22.216);
+  --color-error-content: oklch(25% 0.092 26.042);
+  --radius-selector: 0.5rem;
+  --radius-field: 0.5rem;
+  --radius-box: 0.5rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+
+/* Matrix usa la fuente mono del proyecto (--font-mono) */
+[data-theme="matrix"] body {
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
+
+/* En los temas thunder el ítem activo del menú usa primary en vez de neutral (default de daisy) */
+[data-theme^="thunder"] .menu {
+  --menu-active-bg: var(--color-primary);
+  --menu-active-fg: var(--color-primary-content);
+}
+
+@theme {
+  --breakpoint-xs: 460px;
+}
+
+/* Depuración: borde rojo al elemento, azul a sus hijos directos */
+@utility bb {
+  border: solid 1px red !important;
+}
+
+@utility bbi {
+  & > * {
+    border: solid 1px blue !important;
+  }
+}

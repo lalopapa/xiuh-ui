@@ -1,0 +1,118 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "xiuh",
+  "homepage": "https://lalopapa.github.io/xiuh-ui",
+  "items": [
+    {
+      "name": "app-config",
+      "type": "registry:file",
+      "title": "Configuración de la app",
+      "description": "Nombre, base IndexedDB, temas y colores de la app en un solo archivo.",
+      "files": [{ "path": "registry/config/app.ts", "type": "registry:file", "target": "~/config/app.ts" }]
+    },
+    {
+      "name": "themes",
+      "type": "registry:file",
+      "title": "Temas de Xiuhlab",
+      "description": "Temas daisyUI thunder, thunder-dark y matrix, breakpoint xs y utilidades bb/bbi.",
+      "files": [{ "path": "registry/styles/xiuh-themes.css", "type": "registry:file", "target": "~/styles/xiuh-themes.css" }],
+      "docs": "Importa el archivo en app/globals.css justo después de @import \"tailwindcss\": @import \"../styles/xiuh-themes.css\"; Los temas propios se activan solos (thunder es el default y thunder-dark el de modo oscuro); en @plugin \"daisyui\" usa themes: false, o lista ahí los temas de daisy que quieras sumar (light, dark, forest…)."
+    },
+    {
+      "name": "db",
+      "type": "registry:lib",
+      "title": "Base IndexedDB (Dexie)",
+      "description": "AppDatabase con tabla settings, entidad de ejemplo y SyncedEntity para sincronizar offline.",
+      "dependencies": ["dexie@^4.4.6"],
+      "registryDependencies": ["@xiuh/app-config"],
+      "files": [{ "path": "registry/lib/db.ts", "type": "registry:lib", "target": "~/lib/db.ts" }]
+    },
+    {
+      "name": "settings",
+      "type": "registry:lib",
+      "title": "Preferencias del usuario",
+      "description": "getSetting/setSetting tipados sobre IndexedDB, con respaldo en localStorage.",
+      "registryDependencies": ["@xiuh/db"],
+      "files": [{ "path": "registry/lib/settings.ts", "type": "registry:lib", "target": "~/lib/settings.ts" }]
+    },
+    {
+      "name": "use-setting",
+      "type": "registry:hook",
+      "title": "useSetting",
+      "description": "Preferencia reactiva (useLiveQuery): se actualiza sola entre componentes y pestañas.",
+      "dependencies": ["dexie-react-hooks@^4.4.0"],
+      "registryDependencies": ["@xiuh/settings"],
+      "files": [{ "path": "registry/hooks/use-setting.ts", "type": "registry:hook", "target": "~/hooks/use-setting.ts" }]
+    },
+    {
+      "name": "theme",
+      "type": "registry:component",
+      "title": "Tema",
+      "description": "useTheme, applyTheme (data-theme + cookie + theme-color) y ThemePicker con muestra de colores.",
+      "dependencies": ["@heroicons/react"],
+      "registryDependencies": ["@xiuh/themes", "@xiuh/use-setting"],
+      "files": [
+        { "path": "registry/lib/theme.ts", "type": "registry:lib", "target": "~/lib/theme.ts" },
+        { "path": "registry/hooks/use-theme.ts", "type": "registry:hook", "target": "~/hooks/use-theme.ts" },
+        { "path": "registry/components/ui/theme-picker.tsx", "type": "registry:ui", "target": "~/components/ui/theme-picker.tsx" }
+      ],
+      "docs": "En app/layout.tsx lee la cookie THEME_COOKIE y ponla en <html data-theme={...}> para evitar el parpadeo (ver el layout de xiuh-starter)."
+    },
+    {
+      "name": "pwa",
+      "type": "registry:item",
+      "title": "PWA",
+      "description": "Service worker Serwist (offline + página /~offline), manifest, usePWA y aviso de instalación con soporte iOS.",
+      "dependencies": ["@heroicons/react", "@serwist/next@^9.5.13", "serwist@^9.5.13"],
+      "registryDependencies": ["@xiuh/app-config", "@xiuh/use-setting"],
+      "files": [
+        { "path": "registry/app/sw.ts", "type": "registry:file", "target": "~/app/sw.ts" },
+        { "path": "registry/app/manifest.ts", "type": "registry:file", "target": "~/app/manifest.ts" },
+        { "path": "registry/app/~offline/page.tsx", "type": "registry:file", "target": "~/app/~offline/page.tsx" },
+        { "path": "registry/hooks/use-pwa.ts", "type": "registry:hook", "target": "~/hooks/use-pwa.ts" },
+        { "path": "registry/components/pwa-install-prompt.tsx", "type": "registry:component", "target": "~/components/pwa-install-prompt.tsx" }
+      ],
+      "docs": "Pasos manuales: 1) envuelve next.config.ts con withSerwistInit({ swSrc: 'app/sw.ts', swDest: 'public/sw.js', disable: process.env.NODE_ENV === 'development', additionalPrecacheEntries: [{ url: '/~offline', revision }] }); 2) agrega public/sw.js*, public/swe-worker* al .gitignore; 3) pon los íconos en public/icons (npm run icons en xiuh-starter)."
+    },
+    {
+      "name": "toaster",
+      "type": "registry:ui",
+      "title": "Toaster",
+      "description": "Avisos (react-hot-toast) con estilo daisy y showToast('success' | 'error' | 'info').",
+      "dependencies": ["react-hot-toast", "@heroicons/react"],
+      "files": [{ "path": "registry/components/ui/toaster.tsx", "type": "registry:ui", "target": "~/components/ui/toaster.tsx" }]
+    },
+    {
+      "name": "modal",
+      "type": "registry:ui",
+      "title": "Modal",
+      "description": "<dialog class=\"modal\"> controlado por open; en celular sale desde abajo.",
+      "files": [{ "path": "registry/components/ui/modal.tsx", "type": "registry:ui", "target": "~/components/ui/modal.tsx" }]
+    },
+    {
+      "name": "confirm-modal",
+      "type": "registry:ui",
+      "title": "ConfirmModal",
+      "description": "Confirmación en portal, con estado de carga y acción extra opcional.",
+      "files": [{ "path": "registry/components/ui/confirm-modal.tsx", "type": "registry:ui", "target": "~/components/ui/confirm-modal.tsx" }]
+    },
+    {
+      "name": "spinner",
+      "type": "registry:ui",
+      "title": "Spinner",
+      "description": "loading-spinner de daisy con mensaje opcional.",
+      "files": [{ "path": "registry/components/ui/spinner.tsx", "type": "registry:ui", "target": "~/components/ui/spinner.tsx" }]
+    },
+    {
+      "name": "button-copy",
+      "type": "registry:ui",
+      "title": "ButtonCopy",
+      "description": "Botón que copia texto al portapapeles y confirma con una palomita.",
+      "dependencies": ["@heroicons/react"],
+      "files": [
+        { "path": "registry/lib/clipboard.ts", "type": "registry:lib", "target": "~/lib/clipboard.ts" },
+        { "path": "registry/components/ui/button-copy.tsx", "type": "registry:ui", "target": "~/components/ui/button-copy.tsx" }
+      ]
+    }
+  ]
+}
