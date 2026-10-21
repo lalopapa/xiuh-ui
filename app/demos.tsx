@@ -5,6 +5,9 @@ import { DocumentDuplicateIcon, PencilSquareIcon, TrashIcon } from "@heroicons/r
 import DropdownButton from "@/components/ui/dropdown-button";
 import SearchInput from "@/components/ui/search-input";
 import { FormProvider, useForm } from "react-hook-form";
+import { usePush } from "@/lib/push";
+import PushBanner from "@/components/push-banner";
+import PushToggle from "@/components/push-toggle";
 import FormFieldset, { type FieldConfig } from "@/components/form/form-fieldset";
 import ColumnPicker from "@/components/ui/column-picker";
 import ResponsiveTable, { type Column } from "@/components/ui/responsive-table";
@@ -275,6 +278,25 @@ export function FormDemo() {
   );
 }
 
+function PushDemo() {
+  const push = usePush();
+  return (
+    <div className="flex flex-col gap-3">
+      <span className="text-sm">
+        Estado en este navegador: <span className="badge badge-ghost font-mono">{push.status}</span>
+        {push.pushError && <span className="badge badge-warning ml-1 font-mono">{push.pushError}</span>}
+      </span>
+      <PushBanner onEnabled={() => showToast("success", "Avisos activados")} />
+      <div className="rounded-box bg-base-100 px-4">
+        <PushToggle />
+      </div>
+      <span className="text-xs text-base-content/60">
+        El catálogo no tiene back ni service worker: al activarlos quedan en <code>on-local</code> con error <code>server</code>. En una app real llegan como <code>on-push</code>.
+      </span>
+    </div>
+  );
+}
+
 const ShellLink =({ href, text }: { href: string; text: string }) => (
   <Link href={href} className="btn btn-sm btn-primary">
     {text}
@@ -304,6 +326,7 @@ const DEMOS: Record<string, ComponentType> = {
   "use-setting": SettingsDemo,
   theme: ThemeDemo,
   pwa: PwaDemo,
+  "pwa-push": PushDemo,
   toaster: ToasterDemo,
   modal: ModalDemo,
   "confirm-modal": ConfirmModalDemo,
