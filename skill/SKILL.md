@@ -26,7 +26,7 @@ npx degit lalopapa/xiuh-starter mi-app && cd mi-app && npm install
 4. Moneda e idioma de los formatos: `APP_LOCALE` y `APP_CURRENCY` en `config/app.ts`.
 5. Agrega piezas con `npx shadcn add @xiuh/<pieza>`.
 
-**El starter ya trae:** `base` (config/app.ts, temas, lib/db.ts, lib/settings.ts), `navigation-config`, `use-setting`, `theme`, `pwa`, `navigation`, `mobile-shell`, `toaster`, `modal`, `confirm-modal`, `spinner`, `button-copy`. Todo lo demás se instala cuando se necesite. Ante la duda, mira `components/`, `hooks/` y `lib/` antes de instalar (reinstalar una pieza idéntica no hace nada, pero no hace falta).
+**El starter ya trae:** `base` (config/app.ts, temas, lib/db.ts, lib/settings.ts), `navigation-config`, `use-setting`, `theme`, `pwa`, `navigation`, `mobile-shell`, `toaster`, `modal`, `confirm-modal`, `spinner`, `button-copy`, `format`. Todo lo demás se instala cuando se necesite. Ante la duda, mira `components/`, `hooks/` y `lib/` antes de instalar (reinstalar una pieza idéntica no hace nada, pero no hace falta).
 
 ## Regla principal: primero el registro
 
