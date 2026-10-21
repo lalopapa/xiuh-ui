@@ -30,6 +30,11 @@ npx shadcn add @xiuh/toaster --overwrite   # traer la versión nueva de una piez
 | `use-setting` | `hooks/use-setting.ts`: preferencia reactiva (`useLiveQuery`) |
 | `theme` | `lib/theme.ts`, `hooks/use-theme.ts`, `ThemePicker` |
 | `pwa` | `app/sw.ts` (Serwist), `app/manifest.ts`, `/~offline`, `usePWA`, `PWAInstallPrompt` (incluye iOS) |
+| `navigation` | `config/navigation.ts` (menú y migas), `NavMenu`, `Brand` |
+| `mobile-shell` | Layout PWA: barra con menú hamburguesa y drawer |
+| `dashboard-shell` | `AppShell`: sidebar fijo en escritorio, drawer en móvil, `Topbar` con migas y `UserMenu` |
+| `dropdown-button` | Menú de acciones ⋮ con popover (no lo recorta el overflow) |
+| `search-input` | Buscador con debounce |
 | `toaster` | Avisos react-hot-toast con estilo daisy y `showToast` |
 | `modal`, `confirm-modal` | `<dialog class="modal">` controlados |
 | `spinner`, `button-copy` | Utilidades pequeñas |

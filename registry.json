@@ -75,6 +75,60 @@
       "docs": "Pasos manuales: 1) envuelve next.config.ts con withSerwistInit({ swSrc: 'app/sw.ts', swDest: 'public/sw.js', disable: process.env.NODE_ENV === 'development', additionalPrecacheEntries: [{ url: '/~offline', revision }] }); 2) agrega public/sw.js*, public/swe-worker* al .gitignore; 3) pon los íconos en public/icons (npm run icons en xiuh-starter)."
     },
     {
+      "name": "navigation",
+      "type": "registry:block",
+      "title": "Navegación",
+      "description": "NAV_ITEMS como fuente única del menú y las migas, NavMenu con la sección activa y Brand (logo + nombre).",
+      "dependencies": ["@heroicons/react"],
+      "registryDependencies": ["@xiuh/app-config"],
+      "files": [
+        { "path": "registry/config/navigation.ts", "type": "registry:file", "target": "~/config/navigation.ts" },
+        { "path": "registry/lib/navigation.ts", "type": "registry:lib", "target": "~/lib/navigation.ts" },
+        { "path": "registry/components/layout/nav-menu.tsx", "type": "registry:component", "target": "~/components/layout/nav-menu.tsx" },
+        { "path": "registry/components/layout/brand.tsx", "type": "registry:component", "target": "~/components/layout/brand.tsx" }
+      ]
+    },
+    {
+      "name": "mobile-shell",
+      "type": "registry:block",
+      "title": "Layout móvil (PWA)",
+      "description": "Barra superior con menú hamburguesa y drawer lateral; respeta el notch (safe-area).",
+      "registryDependencies": ["@xiuh/navigation", "@xiuh/theme"],
+      "files": [{ "path": "registry/components/layout/mobile-shell.tsx", "type": "registry:component", "target": "~/components/layout/mobile-shell.tsx" }],
+      "docs": "Úsalo en un layout: <MobileShell>{children}</MobileShell>. Las secciones del menú se editan en config/navigation.ts."
+    },
+    {
+      "name": "dashboard-shell",
+      "type": "registry:block",
+      "title": "Layout de dashboard",
+      "description": "Sidebar fijo en escritorio y drawer en móvil, barra superior con migas y menú de usuario.",
+      "dependencies": ["@heroicons/react"],
+      "registryDependencies": ["@xiuh/navigation", "@xiuh/theme"],
+      "files": [
+        { "path": "registry/components/layout/app-shell.tsx", "type": "registry:component", "target": "~/components/layout/app-shell.tsx" },
+        { "path": "registry/components/layout/sidebar.tsx", "type": "registry:component", "target": "~/components/layout/sidebar.tsx" },
+        { "path": "registry/components/layout/topbar.tsx", "type": "registry:component", "target": "~/components/layout/topbar.tsx" },
+        { "path": "registry/components/layout/user-menu.tsx", "type": "registry:component", "target": "~/components/layout/user-menu.tsx" }
+      ],
+      "docs": "Úsalo en un layout: <AppShell actions={<><ThemePicker /><UserMenu name=\"…\" logoutHref=\"/logout\" /></>}>{children}</AppShell>. Las secciones del menú se editan en config/navigation.ts."
+    },
+    {
+      "name": "dropdown-button",
+      "type": "registry:ui",
+      "title": "DropdownButton",
+      "description": "Menú de acciones (⋮) con popover y anchor positioning: no lo recorta el overflow de tarjetas ni tablas.",
+      "dependencies": ["@heroicons/react"],
+      "files": [{ "path": "registry/components/ui/dropdown-button.tsx", "type": "registry:ui", "target": "~/components/ui/dropdown-button.tsx" }]
+    },
+    {
+      "name": "search-input",
+      "type": "registry:ui",
+      "title": "SearchInput",
+      "description": "Buscador con debounce y botón para limpiar.",
+      "dependencies": ["@heroicons/react"],
+      "files": [{ "path": "registry/components/ui/search-input.tsx", "type": "registry:ui", "target": "~/components/ui/search-input.tsx" }]
+    },
+    {
       "name": "toaster",
       "type": "registry:ui",
       "title": "Toaster",

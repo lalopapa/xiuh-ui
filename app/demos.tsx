@@ -1,5 +1,9 @@
 "use client";
 import { useState, type ComponentType } from "react";
+import Link from "next/link";
+import { DocumentDuplicateIcon, PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
+import DropdownButton from "@/components/ui/dropdown-button";
+import SearchInput from "@/components/ui/search-input";
 import { THEMES } from "@/config/app";
 import { usePWA } from "@/hooks/use-pwa";
 import { useSetting } from "@/hooks/use-setting";
@@ -125,7 +129,45 @@ function SpinnerDemo() {
   );
 }
 
+function DropdownDemo() {
+  return (
+    <div className="flex items-center gap-2">
+      <span className="text-sm">Acciones de un registro:</span>
+      <DropdownButton
+        items={[
+          { label: "Editar", icon: PencilSquareIcon, onClick: () => showToast("info", "Editar") },
+          { label: "Duplicar", icon: DocumentDuplicateIcon, onClick: () => showToast("info", "Duplicar") },
+          { label: "Eliminar", icon: TrashIcon, className: "text-error", onClick: () => showToast("error", "Eliminar") },
+        ]}
+      />
+    </div>
+  );
+}
+
+function SearchDemo() {
+  const [term, setTerm] = useState("");
+  return (
+    <div className="flex flex-col gap-2">
+      <SearchInput onSearch={setTerm} placeholder="Busca algo…" />
+      <span className="text-sm text-base-content/70">
+        onSearch (con 300 ms de debounce): <b className="font-mono">{JSON.stringify(term)}</b>
+      </span>
+    </div>
+  );
+}
+
+const ShellLink = ({ href, text }: { href: string; text: string }) => (
+  <Link href={href} className="btn btn-sm btn-primary">
+    {text}
+  </Link>
+);
+
 const DEMOS: Record<string, ComponentType> = {
+  navigation: () => <span className="text-sm">Se ve en acción dentro de los dos layouts de abajo.</span>,
+  "mobile-shell": () => <ShellLink href="/demo/mobile" text="Abrir demo del layout móvil" />,
+  "dashboard-shell": () => <ShellLink href="/demo/dashboard" text="Abrir demo del dashboard" />,
+  "dropdown-button": DropdownDemo,
+  "search-input": SearchDemo,
   themes: ThemesDemo,
   "use-setting": SettingsDemo,
   theme: ThemeDemo,
