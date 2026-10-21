@@ -5,6 +5,9 @@ export const APP_DESCRIPTION = 'Una app de Xiuhlab.';
 // Nombre de la base IndexedDB y prefijo de localStorage (cámbialos por app para que no choquen en el mismo dominio)
 export const APP_DB_NAME = 'XiuhAppDB';
 export const APP_STORAGE_PREFIX = 'xiuhapp_';
+// Idioma y moneda de los formatos (lib/format.ts): p. ej. 'en-AU' y 'AUD' para un cliente en Australia
+export const APP_LOCALE = 'es-MX';
+export const APP_CURRENCY = 'MXN';
 
 // Temas disponibles: deben coincidir con `themes:` de @plugin "daisyui" en globals.css
 export const THEMES = ['thunder', 'thunder-dark', 'matrix'] as const;

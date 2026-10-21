@@ -47,6 +47,7 @@ En un proyecto que no salió del starter, primero `npx shadcn add @xiuh/base @xi
 | `responsive-table` | Tabla en escritorio y tarjetas en móvil; orden por columna, acciones por fila, columnas visibles en IndexedDB (`useTableColumns`) |
 | `column-picker` | Dropdown para elegir columnas visibles de una `ResponsiveTable` |
 | `form-fieldset` | Campos de react-hook-form (`TextField`, `NumberField`, `SelectField`, `ToggleField`, `CheckboxesField`) y `FormFieldset` para armar formularios desde una lista de campos |
+| `format` | `formatMoney`, `formatNumber`, `formatDate`, `formatDateTime` con `APP_LOCALE` / `APP_CURRENCY` |
 | `pwa-push` | Web Push en el service worker (`app/sw-push.ts`), estado del dispositivo (`lib/push.ts`), `PushBanner` y `PushToggle` |
 | `toaster` | Avisos react-hot-toast con estilo daisy y `showToast` |
 | `modal`, `confirm-modal` | `<dialog class="modal">` controlados |
@@ -92,6 +93,16 @@ En iPhone/iPad, push solo funciona con la app instalada (iOS 16.4+); `usePush()`
 - Nada de clases armadas con plantillas (`loading-${size}`): Tailwind no las detecta.
 - El CLI borra el comentario de la **primera línea** de los archivos que transforma (ui, lib, hook, component): no los empieces con un comentario. Los `registry:file` se copian tal cual (por eso `sw.ts` conserva su `/// <reference>`).
 - En temas propios, `default`/`prefersdark` van dentro del bloque `@plugin "daisyui/theme"`; los flags `--default`/`--prefersdark` de `themes:` no les aplican.
+
+## Skill para Claude
+
+`skill/` es la skill `xiuh-ui` para Claude Code: catálogo, reglas (plantillas vs. código, solo tokens de daisy, textos por props) y la API de cada pieza en `skill/references/components.md`. Con ella, Claude usa `npx shadcn add @xiuh/…` en vez de reescribir componentes.
+
+```bash
+npm run skill:install   # copia skill/ a ~/.claude/skills/xiuh-ui
+```
+
+Al agregar o cambiar una pieza, actualiza también `skill/SKILL.md` (tabla de piezas) y `skill/references/components.md` (props y ejemplo), y vuelve a correr `npm run skill:install`.
 
 ## Probar el registro en local
 

@@ -386,6 +386,14 @@
       "docs": "Pasos: 1) en app/sw.ts descomenta el import de registerPushHandlers y la línea registerPushHandlers(self); 2) el back necesita GET /api/push/key → { publicKey }, POST y DELETE /api/push/subscriptions (ajusta las rutas en el objeto api de lib/push.ts, o define NEXT_PUBLIC_VAPID_PUBLIC_KEY); 3) el back envía con web-push un JSON { title, body, url, tag, priority } y borra la suscripción si responde 404/410. Llaves: npx web-push generate-vapid-keys."
     },
     {
+      "name": "format",
+      "type": "registry:lib",
+      "title": "Formatos",
+      "description": "formatMoney, formatNumber, formatDate y formatDateTime con APP_LOCALE y APP_CURRENCY de config/app.ts. Requiere @xiuh/base.",
+      "files": [{ "path": "registry/lib/format.ts", "type": "registry:lib", "target": "~/lib/format.ts" }],
+      "docs": "Si tu config/app.ts es anterior a esta pieza, agrega: export const APP_LOCALE = 'es-MX'; export const APP_CURRENCY = 'MXN';"
+    },
+    {
       "name": "toaster",
       "type": "registry:ui",
       "title": "Toaster",

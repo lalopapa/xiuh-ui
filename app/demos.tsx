@@ -6,6 +6,7 @@ import DropdownButton from "@/components/ui/dropdown-button";
 import SearchInput from "@/components/ui/search-input";
 import { FormProvider, useForm } from "react-hook-form";
 import { usePush } from "@/lib/push";
+import { formatDate, formatMoney } from "@/lib/format";
 import PushBanner from "@/components/push-banner";
 import PushToggle from "@/components/push-toggle";
 import FormFieldset, { type FieldConfig } from "@/components/form/form-fieldset";
@@ -182,8 +183,8 @@ const CLIENT_COLUMNS: Column<Client>[] = [
     sortable: true,
     render: (c) => <span className={`badge badge-sm ${c.plan === "Pro" ? "badge-primary" : "badge-ghost"}`}>{c.plan}</span>,
   },
-  { key: "amount", label: "Monto", sortable: true, className: "text-end tabular-nums", render: (c) => `$${c.amount.toLocaleString("es-MX")}` },
-  { key: "since", label: "Cliente desde", sortable: (c) => c.since, defaultVisible: false, render: (c) => c.since?.toLocaleDateString("es-MX") ?? "—" },
+  { key: "amount", label: "Monto", sortable: true, className: "text-end tabular-nums", render: (c) => formatMoney(c.amount) },
+  { key: "since", label: "Cliente desde", sortable: (c) => c.since, defaultVisible: false, render: (c) => formatDate(c.since) },
 ];
 
 export function TableDemo() {

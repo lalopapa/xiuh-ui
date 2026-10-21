@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "registry:build": "shadcn build",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "skill:install": "node -e \"const fs=require('fs'),p=require('path'),d=p.join(require('os').homedir(),'.claude','skills','xiuh-ui');fs.rmSync(d,{recursive:true,force:true});fs.cpSync('skill',d,{recursive:true});console.log('Skill instalada en '+d)\""
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
