@@ -4,6 +4,8 @@ import Link from "next/link";
 import { DocumentDuplicateIcon, PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
 import DropdownButton from "@/components/ui/dropdown-button";
 import SearchInput from "@/components/ui/search-input";
+import { FormProvider, useForm } from "react-hook-form";
+import FormFieldset, { type FieldConfig } from "@/components/form/form-fieldset";
 import ColumnPicker from "@/components/ui/column-picker";
 import ResponsiveTable, { type Column } from "@/components/ui/responsive-table";
 import { THEMES } from "@/config/app";
@@ -215,6 +217,64 @@ export function TableDemo() {
   );
 }
 
+const FORM_FIELDS: FieldConfig[] = [
+  { name: "name", label: "Nombre", required: true, maxLength: 40, showCounter: true, autoComplete: "name" },
+  { name: "email", label: "Correo", type: "email", required: true, autoComplete: "email" },
+  { name: "phone", label: "Teléfono", type: "tel", help: "Con lada, sin espacios" },
+  {
+    name: "plan",
+    label: "Plan",
+    type: "select",
+    required: true,
+    options: [
+      { value: "basic", label: "Básico" },
+      { value: "pro", label: "Pro" },
+    ],
+  },
+  { name: "budget", label: "Presupuesto", type: "number", prefix: "$", suffix: "MXN", min: 0, max: 100000, step: 0.01 },
+  { name: "guests", label: "Personas", type: "number", min: 1, max: 20, required: true },
+  {
+    name: "interests",
+    label: "Intereses",
+    type: "checkboxes",
+    required: true,
+    className: "sm:col-span-2",
+    options: [
+      { value: "web", label: "Web" },
+      { value: "apps", label: "Apps" },
+      { value: "bots", label: "Bots" },
+    ],
+  },
+  { name: "notes", label: "Notas", type: "textarea", maxLength: 280, showCounter: true, className: "sm:col-span-2" },
+  { name: "newsletter", label: "Recibir novedades por correo", type: "toggle", className: "sm:col-span-2" },
+];
+
+export function FormDemo() {
+  const methods = useForm({ mode: "onTouched", defaultValues: { interests: [], newsletter: true } });
+  const { isSubmitting, isDirty } = methods.formState;
+  const submit = methods.handleSubmit(async (values) => {
+    await new Promise((resolve) => setTimeout(resolve, 600));
+    showToast("success", `Guardado: ${JSON.stringify(values)}`);
+    methods.reset(values);
+  });
+  return (
+    <FormProvider {...methods}>
+      <form onSubmit={submit} noValidate className="flex flex-col gap-3">
+        <FormFieldset fields={FORM_FIELDS} disabled={isSubmitting} />
+        <div className="flex gap-2">
+          <button type="submit" className="btn btn-primary" disabled={isSubmitting || !isDirty}>
+            {isSubmitting && <span className="loading loading-spinner loading-sm" />}
+            Guardar
+          </button>
+          <button type="button" className="btn btn-ghost" onClick={() => methods.reset()} disabled={isSubmitting}>
+            Restablecer
+          </button>
+        </div>
+      </form>
+    </FormProvider>
+  );
+}
+
 const ShellLink =({ href, text }: { href: string; text: string }) => (
   <Link href={href} className="btn btn-sm btn-primary">
     {text}
@@ -234,6 +294,12 @@ const DEMOS: Record<string, ComponentType> = {
     </div>
   ),
   "column-picker": () => <span className="text-sm">Se ve junto a la tabla de arriba.</span>,
+  "form-fieldset": () => (
+    <div className="flex flex-col gap-3">
+      <FormDemo />
+      <ShellLink href="/demo/form" text="Abrir a pantalla completa" />
+    </div>
+  ),
   themes: ThemesDemo,
   "use-setting": SettingsDemo,
   theme: ThemeDemo,

@@ -65,9 +65,10 @@ function sortRows<T>(rows: T[], column: Column<T> | undefined, dir: Sort['dir'])
   });
 }
 
-// En móvil cada fila es una tarjeta y cada celda una línea "etiqueta: valor" (la etiqueta sale de data-label)
+// En móvil cada fila es una tarjeta y cada celda una línea "etiqueta: valor" (la etiqueta sale de data-label).
+// max-md:text-start anula alineaciones de escritorio (p. ej. text-end en montos) que moverían también la etiqueta
 const MOBILE_CELL =
-  'max-md:grid max-md:grid-cols-[minmax(6rem,40%)_1fr] max-md:items-center max-md:gap-2 max-md:border-0 max-md:px-0 max-md:py-1 max-md:before:text-sm max-md:before:text-base-content/60 max-md:before:content-[attr(data-label)]';
+  'max-md:grid max-md:grid-cols-[minmax(6rem,40%)_1fr] max-md:items-center max-md:text-start max-md:gap-2 max-md:border-0 max-md:px-0 max-md:py-1 max-md:before:text-sm max-md:before:text-base-content/60 max-md:before:content-[attr(data-label)]';
 const MOBILE_TITLE_CELL = 'max-md:block max-md:border-0 max-md:px-0 max-md:pt-0 max-md:pb-1 max-md:pr-10 max-md:text-base max-md:font-semibold';
 
 /** Tabla en escritorio y tarjetas en móvil, con orden por columna y columnas visibles guardadas */

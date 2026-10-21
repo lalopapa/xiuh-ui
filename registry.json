@@ -150,6 +150,18 @@
       "files": [{ "path": "registry/components/ui/column-picker.tsx", "type": "registry:ui", "target": "~/components/ui/column-picker.tsx" }]
     },
     {
+      "name": "form-fieldset",
+      "type": "registry:block",
+      "title": "Formularios",
+      "description": "Campos de react-hook-form con fieldset de daisy (texto, número, select, toggle, checkboxes) y FormFieldset para armar formularios desde una lista de campos.",
+      "dependencies": ["react-hook-form@^7.90.0"],
+      "files": [
+        { "path": "registry/components/form/fields.tsx", "type": "registry:component", "target": "~/components/form/fields.tsx" },
+        { "path": "registry/components/form/form-fieldset.tsx", "type": "registry:component", "target": "~/components/form/form-fieldset.tsx" }
+      ],
+      "docs": "Los campos leen el formulario con useFormContext: envuelve tu <form> en <FormProvider {...methods}>. Los textos de validación están en FIELD_MESSAGES (components/form/fields.tsx). Con zod o yup, pasa el resolver a useForm y los errores se muestran igual."
+    },
+    {
       "name": "toaster",
       "type": "registry:ui",
       "title": "Toaster",

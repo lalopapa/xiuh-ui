@@ -37,6 +37,7 @@ npx shadcn add @xiuh/toaster --overwrite   # traer la versión nueva de una piez
 | `search-input` | Buscador con debounce |
 | `responsive-table` | Tabla en escritorio y tarjetas en móvil; orden por columna, acciones por fila, columnas visibles en IndexedDB (`useTableColumns`) |
 | `column-picker` | Dropdown para elegir columnas visibles de una `ResponsiveTable` |
+| `form-fieldset` | Campos de react-hook-form (`TextField`, `NumberField`, `SelectField`, `ToggleField`, `CheckboxesField`) y `FormFieldset` para armar formularios desde una lista de campos |
 | `toaster` | Avisos react-hot-toast con estilo daisy y `showToast` |
 | `modal`, `confirm-modal` | `<dialog class="modal">` controlados |
 | `spinner`, `button-copy` | Utilidades pequeñas |
