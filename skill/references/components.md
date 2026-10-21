@@ -165,7 +165,7 @@ showToast('success' | 'error' | 'info', 'Mensaje');
 
 ```tsx
 const { theme, setTheme, loaded } = useTheme();   // guarda en IndexedDB + cookie + meta theme-color
-<ThemePicker label="Tema" labels={{ thunder: 'Claro', 'thunder-dark': 'Oscuro', matrix: 'Matrix' }} />
+<ThemePicker label="Tema" labels={{ light: 'Claro', dark: 'Oscuro', forest: 'Bosque', matrix: 'Matrix' }} />
 
 // lib/settings.ts → interface Settings { …; vista_compacta: boolean }
 const [compacta, setCompacta, loaded] = useSetting('vista_compacta', false);

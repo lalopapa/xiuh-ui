@@ -62,7 +62,7 @@ npx shadcn add @xiuh/responsive-table @xiuh/column-picker
 
 ## Convenciones (al usar o modificar piezas, y al escribir UI nueva)
 
-- **Solo clases de daisyUI y tokens del tema** (`bg-base-100`, `text-base-content/70`, `btn-primary`, `rounded-box`). Nunca colores fijos (`#fff`, `bg-[#f2f2f2]`): rompen los temas `thunder-dark` y `matrix`.
+- **Solo clases de daisyUI y tokens del tema** (`bg-base-100`, `text-base-content/70`, `btn-primary`, `rounded-box`). Nunca colores fijos (`#fff`, `bg-[#f2f2f2]`): rompen los temas oscuros (`dark`, `forest`, `matrix`).
 - **Clases completas**, nunca armadas con plantillas (`loading-${size}`): Tailwind no las detecta. Usa un mapa de clases.
 - **Textos como props con valor por defecto en español**; las piezas no importan librerías de i18n. Si la app usa i18n, pasa los textos traducidos por props.
 - Íconos: `@heroicons/react/24/outline`, tamaño con `size-4` / `size-5`.

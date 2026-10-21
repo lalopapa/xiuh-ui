@@ -32,7 +32,7 @@ En un proyecto que no salió del starter, primero `npx shadcn add @xiuh/base @xi
 |---|---|
 | `base` | Plantillas editables: instala `app-config`, `themes`, `db` y `settings` |
 | `app-config` | `config/app.ts`: nombre, base IndexedDB, temas y colores |
-| `themes` | `styles/xiuh-themes.css`: temas thunder, thunder-dark y matrix, breakpoint `xs`, utilidades `bb`/`bbi` |
+| `themes` | `styles/xiuh-themes.css`: temas light, dark, forest y matrix, breakpoint `xs`, utilidades `bb`/`bbi` |
 | `db` | `lib/db.ts`: Dexie con tabla `settings` y `SyncedEntity` para sincronizar offline |
 | `settings` | `lib/settings.ts`: `getSetting`/`setSetting` tipados, con respaldo en localStorage |
 | `navigation-config` | `config/navigation.ts`: `NAV_ITEMS`, fuente única del menú y las migas |

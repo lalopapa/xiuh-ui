@@ -9,17 +9,18 @@ export const APP_STORAGE_PREFIX = 'xiuhapp_';
 export const APP_LOCALE = 'es-MX';
 export const APP_CURRENCY = 'MXN';
 
-// Temas disponibles: deben coincidir con `themes:` de @plugin "daisyui" en globals.css
-export const THEMES = ['thunder', 'thunder-dark', 'matrix'] as const;
+// Temas que se ofrecen al usuario: cada uno debe existir en styles/xiuh-themes.css
+export const THEMES = ['light', 'dark', 'forest', 'matrix'] as const;
 export type Theme = (typeof THEMES)[number];
 // Sin preferencia guardada se usa DEFAULT_THEME, o DARK_THEME si el sistema está en modo oscuro
-export const DEFAULT_THEME: Theme = 'thunder';
-export const DARK_THEME: Theme = 'thunder-dark';
+export const DEFAULT_THEME: Theme = 'light';
+export const DARK_THEME: Theme = 'dark';
 
 // Color de la barra del navegador / status bar por tema (el base-200 de cada uno)
 export const THEME_COLORS: Record<Theme, string> = {
-  thunder: '#F6F5FB',
-  'thunder-dark': '#0F0D17',
+  light: '#F6F5FB',
+  dark: '#0F0D17',
+  forest: '#161212',
   matrix: '#0d1529',
 };
 // Colores del manifest (splash screen e ícono en Android)

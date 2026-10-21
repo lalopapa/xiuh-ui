@@ -25,7 +25,7 @@ import { showToast } from "@/components/ui/toaster";
 
 function ThemesDemo() {
   return (
-    <div className="grid gap-3 sm:grid-cols-3">
+    <div className="grid gap-3 sm:grid-cols-2">
       {THEMES.map((t) => (
         <div key={t} data-theme={t} className="flex flex-col gap-2 rounded-box border border-base-300 bg-base-100 p-3 text-base-content">
           <span className="font-semibold">{t}</span>

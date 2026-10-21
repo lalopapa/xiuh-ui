@@ -14,7 +14,7 @@
         "@xiuh/db",
         "@xiuh/settings"
       ],
-      "docs": "Importa el archivo en app/globals.css justo después de @import \"tailwindcss\": @import \"../styles/xiuh-themes.css\"; Los temas propios se activan solos (thunder es el default y thunder-dark el de modo oscuro); en @plugin \"daisyui\" usa themes: false, o lista ahí los temas de daisy que quieras sumar (light, dark, forest…)."
+      "docs": "Importa el archivo en app/globals.css justo después de @import \"tailwindcss\": @import \"../styles/xiuh-themes.css\"; Los temas propios se activan solos (light es el default y dark el de modo oscuro); en @plugin \"daisyui\" usa themes: false. Para sumar otro tema de daisy, copia sus valores a un bloque @plugin \"daisyui/theme\" como forest y agrégalo a THEMES en config/app.ts."
     },
     {
       "name": "app-config",
@@ -33,7 +33,7 @@
       "name": "themes",
       "type": "registry:file",
       "title": "Temas de Xiuhlab",
-      "description": "Temas daisyUI thunder, thunder-dark y matrix, breakpoint xs y utilidades bb/bbi.",
+      "description": "Temas daisyUI light, dark, forest y matrix, breakpoint xs y utilidades bb/bbi.",
       "files": [
         {
           "path": "registry/styles/xiuh-themes.css",
@@ -41,7 +41,7 @@
           "target": "~/styles/xiuh-themes.css"
         }
       ],
-      "docs": "Importa el archivo en app/globals.css justo después de @import \"tailwindcss\": @import \"../styles/xiuh-themes.css\"; Los temas propios se activan solos (thunder es el default y thunder-dark el de modo oscuro); en @plugin \"daisyui\" usa themes: false, o lista ahí los temas de daisy que quieras sumar (light, dark, forest…)."
+      "docs": "Importa el archivo en app/globals.css justo después de @import \"tailwindcss\": @import \"../styles/xiuh-themes.css\"; Los temas propios se activan solos (light es el default y dark el de modo oscuro); en @plugin \"daisyui\" usa themes: false. Para sumar otro tema de daisy, copia sus valores a un bloque @plugin \"daisyui/theme\" como forest y agrégalo a THEMES en config/app.ts."
     },
     {
       "name": "db",
